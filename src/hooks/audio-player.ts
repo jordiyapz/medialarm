@@ -14,7 +14,7 @@ export const useAlarmAudio = (src: string) => {
       loop: true,
       onend: handleEnd,
     });
-  }, []);
+  }, [player.load]);
 
   useEffect(() => {
     if (loopCt > 0) {
@@ -22,7 +22,7 @@ export const useAlarmAudio = (src: string) => {
     } else {
       player.stop();
     }
-  }, [loopCt]);
+  }, [loopCt, player]);
 
   const ring = (x: number) => {
     setLoopCt(x);

@@ -6,16 +6,13 @@ import { useAlarm } from "./hooks";
 export type AlarmProps = {
   timetable: Timelet[];
   config: AlarmConfig;
-  // ref: MutableRefObject<AlarmRef>;
 };
 
 export const Alarm = ({ timetable, config }: AlarmProps) => {
-  const { timer, closestTime , ring} = useAlarm(timetable, config);
+  const { timer, closestTime } = useAlarm(timetable, config);
 
-  // console.debug(closestTime?.time);
   return (
     <>
-    <button onClick={() => ring(3)}>Ring</button>
       {closestTime ? (
         <TimeDisplay
           days={timer.days}
