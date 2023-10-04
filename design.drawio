@@ -1,0 +1,44 @@
+<mxfile host="Electron" modified="2023-10-01T06:15:14.181Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="VQpkOaCaOpIQW31-Beck" version="21.1.2" type="device">
+  <diagram name="Page-1" id="VKiB7ePyFh6QQ1p8XKgu">
+    <mxGraphModel dx="600" dy="355" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o3keubduVKJuZqHNuhIf-2" value="Alarm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="290" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-3" value="Audio Player" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="350" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-4" value="Browser API" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="410" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-5" value="Application" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="230" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-6" value="Other components" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="290" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-10" value="Alarm" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="150" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-15" value="audio player" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="680" y="240" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-16" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="o3keubduVKJuZqHNuhIf-15">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-17" value="Time display" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="680" y="190" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o3keubduVKJuZqHNuhIf-18" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="o3keubduVKJuZqHNuhIf-17">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
