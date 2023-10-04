@@ -9,7 +9,7 @@ export const useAlarm = (timetable: Timelet[], _config: AlarmConfig) => {
 
   const [closestTime, setClosestTime] = useState<Timelet | null>(null);
 
-  const handleTimeout = async () => {
+  const handleTimeout = () => {
     if (closestTime) player.ring(closestTime.numOfRings);
 
     const newClosestTime = findNearestTime(timetable);
