@@ -1,8 +1,9 @@
 import { Alarm, AlarmConfig, Timelet } from "./components/alarm";
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { Main } from "./components/main";
+import { Footer } from "./components/footer";
+import { Drawer } from "./components/drawer";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
 function App() {
   const alarmConfig: AlarmConfig = {};
@@ -17,7 +18,15 @@ function App() {
     { id: "6", time: new Date("2023-10-02T12:36:00"), numOfRings: 3 },
   ];
 
-  return <Alarm timetable={timetable} config={alarmConfig} />;
+  // return <Alarm timetable={timetable} config={alarmConfig} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Main />
+      <Footer />
+      <Drawer />
+    </ThemeProvider>
+  );
 }
 
 export default App;
