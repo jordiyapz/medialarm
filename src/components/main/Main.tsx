@@ -1,13 +1,41 @@
-import { Container } from "@mui/material";
+import { Container, Box, useTheme } from "@mui/material";
 import { MainClock } from "./MainClock";
 import { MainDay } from "./MainDay";
+import { DrawerHeader } from "../drawer";
 
-export const Main = () => {
+export type MainProps = {
+  drawerWidth: number;
+  drawerOpen: boolean;
+};
+
+export const Main = ({ drawerWidth, drawerOpen }: MainProps) => {
+  const theme = useTheme();
   return (
-    <main>
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        maxWidth: "100%",
+        // pr: `${drawerWidth}px`,
+        mr: `-${drawerWidth}px`,
+        transition: theme.transitions.create(["margin", "max-width"], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        ...(drawerOpen && {
+          maxWidth: `calc(100% - ${drawerWidth}px)`,
+          transition: theme.transitions.create(["margin", "max-width"], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+          mr: 0,
+        }),
+      }}
+    >
+      <DrawerHeader />
       <Container
         sx={{
-          minHeight: "80vh",
+          minHeight: "90vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -16,6 +44,6 @@ export const Main = () => {
         <MainClock />
         <MainDay />
       </Container>
-    </main>
+    </Box>
   );
 };

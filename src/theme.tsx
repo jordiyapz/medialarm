@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const pallete = {
   bgMain: "#242B31",
-  bgPaper: "#28363E",
+  bgDrawer: "#28363E",
   grey300: "#384349",
   grey400: "#768086",
   off: "#8D24DE",
@@ -19,21 +19,17 @@ const theme = createTheme({
     },
     background: {
       default: pallete.bgMain,
-      paper: pallete.bgPaper,
+      // paper: pallete.bgPaper,
+    },
+  },
+  mixins: {
+    toolbar: {
+      height: "116px",
+      position: "absolute",
+      top: "auto",
+      bottom: 0,
     },
   },
 });
-
-/** Custom palette */
-// theme = createTheme(theme, {
-//   palette: {
-//     grey: theme.palette.augmentColor({
-//       color: {
-//         main: pallete.grey300,
-//       },
-//       name: "grey",
-//     }),
-//   },
-// });
 
 export { theme };
