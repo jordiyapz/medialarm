@@ -8,6 +8,7 @@ import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 
 export function NextAlarm() {
   const theme = useTheme();
+  
   return (
     <Stack direction="row" alignItems="center">
       <Box>

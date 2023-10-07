@@ -30,8 +30,8 @@ export const Alarm = ({ timetable, config }: AlarmProps) => {
           key={t.id}
           style={t.id === closestTime?.id ? { fontWeight: "bold" } : {}}
         >
-          #{t.id}. {getDayOfWeek(t.time.getDay())}, {t.time.getDate()}/
-          {t.time.getMonth() + 1} | {t.time.getHours()}:{t.time.getMinutes()}
+          #{t.id}. {getDayOfWeek(t.start.getDay())}, {t.start.getDate()}/
+          {t.start.getMonth() + 1} | {t.start.getHours()}:{t.start.getMinutes()}
         </div>
       ))}
       {/* <audio ref={audioRef} src={ringtone}/> */}

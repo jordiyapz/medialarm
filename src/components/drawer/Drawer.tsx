@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Drawer,
   type DrawerProps,
@@ -5,27 +6,60 @@ import {
   IconButton,
   List,
   Box,
-  ListItem,
-  ListItemButton,
   Divider,
-  Switch,
-  Stack,
-  FormLabel,
 } from "@mui/material";
-import { DrawerHeader } from ".";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { pallete } from "../../theme";
+import { pallete } from "@/theme";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { addAlarm, removeAllAlarms } from "@/slices/alarms";
+import { AlarmListItem, toTimelet } from "@/entities/timelet";
+import { DrawerHeader } from ".";
 
 export type AlarmDrawerProps = Pick<DrawerProps, "open"> & {
   onClose(): void;
   drawerWidth: number;
 };
 
+const alarmTimelets = [
+  {
+    numOfRings: 3,
+    start: "2023-10-07T08:00:00",
+  },
+  {
+    start: "2023-10-07T11:10:00",
+  },
+  {
+    numOfRings: 3,
+    start: "2023-10-05T14:10:00",
+  },
+  {
+    numOfRings: 4,
+    start: "2023-10-07T10:10:00",
+  },
+].map((data, i) => ({
+  id: String(i),
+  disabled: false,
+  numOfRings: data.numOfRings ?? 1,
+  start: new Date(data.start),
+}));
+
 export const AlarmDrawer = ({
   drawerWidth,
   onClose,
   ...drawerProps
 }: AlarmDrawerProps) => {
+  const alarms = useAppSelector((s) => s.alarms);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(addAlarm(alarmTimelets));
+    return () => {
+      dispatch(removeAllAlarms());
+    };
+  }, [dispatch]);
+
+  console.debug(alarms);
+
   return (
     <Drawer
       {...drawerProps}
@@ -47,22 +81,9 @@ export const AlarmDrawer = ({
         </Typography>
       </Box>
       <List>
-        <ListItem disablePadding sx={{ alignItems: "stretch" }}>
-          <ListItemButton>
-            <Stack>
-              <Typography color={pallete.grey400}>Sun, 13 Oct 2023</Typography>
-              <Typography fontSize="1.4rem" fontWeight={100}>
-                08:00
-              </Typography>
-              <Typography color={pallete.grey400} fontWeight={100}>
-                ring once
-              </Typography>
-            </Stack>
-          </ListItemButton>
-          <FormLabel sx={{ pr: 3, display: "flex", alignItems: "center" }}>
-            <Switch edge="end" />
-          </FormLabel>
-        </ListItem>
+        {alarms.timelets.map(toTimelet).map((t) => (
+          <AlarmListItem timelet={t} />
+        ))}
       </List>
       <DrawerHeader>
         <Divider />

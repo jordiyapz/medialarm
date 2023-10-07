@@ -28,7 +28,7 @@ export const useAlarm = (timetable: Timelet[], _config: AlarmConfig) => {
   }, [timetable]);
 
   useEffect(() => {
-    if (closestTime) timer.restart(closestTime.time);
+    if (closestTime) timer.restart(closestTime.start);
     return timer.pause;
   }, [closestTime]);
 

@@ -1,9 +1,18 @@
 import { Main } from "./components/main";
 import { Footer } from "./components/footer";
 import { AlarmDrawer } from "./components/drawer";
-import { CssBaseline, ThemeProvider, Box } from "@mui/material";
+import {
+  CssBaseline,
+  ThemeProvider,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import { theme } from "./theme";
 import { useState } from "react";
+import { PersistGate } from "redux-persist/integration/react";
+import { store } from "./store";
+import { Provider } from "react-redux";
+import { useAppSelector } from "./hooks/store";
 
 const drawerWidth = 350;
 
@@ -31,19 +40,23 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex" }}>
-        <Main drawerWidth={drawerWidth} drawerOpen={open} />
-        <Footer
-          open={open}
-          drawerWidth={drawerWidth}
-          onMenuClick={handleOpenDrawer}
-        />
-        <AlarmDrawer
-          open={open}
-          onClose={handleOpenDrawer}
-          drawerWidth={drawerWidth}
-        />
-      </Box>
+      <Provider store={store}>
+        {/* <PersistGate loading={<CircularProgress />} persistor={persistor}> */}
+          <Box sx={{ display: "flex" }}>
+            <Main drawerWidth={drawerWidth} drawerOpen={open} />
+            <Footer
+              open={open}
+              drawerWidth={drawerWidth}
+              onMenuClick={handleOpenDrawer}
+            />
+            <AlarmDrawer
+              open={open}
+              onClose={handleOpenDrawer}
+              drawerWidth={drawerWidth}
+            />
+          </Box>
+        {/* </PersistGate> */}
+      </Provider>
     </ThemeProvider>
   );
 }

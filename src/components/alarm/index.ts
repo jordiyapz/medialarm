@@ -1,3 +1,3 @@
 export * from "./Alarm";
-export type * from "./types";
+export type * from "../../entities/timelet/types";
 export * from "./utils";

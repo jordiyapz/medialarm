@@ -2,7 +2,7 @@ import { Timelet } from ".";
 
 /** return the closest time between timelets */
 export const findNearestTime = (timelets: Timelet[]) => {
-  const epochs = timelets.map((t) => t.time.getTime());
+  const epochs = timelets.map((t) => t.start.getTime());
   const currentEpoch = new Date().getTime();
   const deltas = epochs
     .map((e) => e - currentEpoch)
