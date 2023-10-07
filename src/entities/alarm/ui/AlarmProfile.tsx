@@ -1,10 +1,10 @@
 import {
   Typography,
   ListItem,
-  ListItemButton,
   Switch,
   Stack,
-  FormLabel,
+  ListItemSecondaryAction,
+  ListItemText,
 } from "@mui/material";
 import { pallete } from "@/theme";
 
@@ -28,8 +28,8 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
     profile.numOfRings > 1 ? `ring ${profile.numOfRings} times` : `ring once`;
 
   return (
-    <ListItem disablePadding sx={{ alignItems: "stretch" }}>
-      <ListItemButton>
+    <ListItem dense sx={{ alignItems: "stretch" }}>
+      <ListItemText>
         <Stack>
           <Typography color={pallete.grey400}>
             {profile.start.toLocaleDateString("en-US", dateFormat)}
@@ -42,14 +42,14 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
             {ringStr}
           </Typography>
         </Stack>
-      </ListItemButton>
-      <FormLabel sx={{ pr: 3, display: "flex", alignItems: "center" }}>
+      </ListItemText>
+      <ListItemSecondaryAction>
         <Switch
           edge="end"
           checked={!profile.disabled}
           onChange={handleSwitchToggle(profile.id)}
         />
-      </FormLabel>
+      </ListItemSecondaryAction>
     </ListItem>
   );
 };

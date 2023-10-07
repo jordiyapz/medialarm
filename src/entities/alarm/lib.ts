@@ -1,8 +1,17 @@
-import { PlainAlarmProfile } from "./types";
+import { AlarmProfile, PlainAlarmProfile } from "./types";
 
-/**Deserialize plain alarm profile (usually from store) into workable alarm profile
- */
-export const rehydrateAlarmProfile = (t: PlainAlarmProfile) => ({
-  ...t,
-  start: new Date(t.start),
+/** Deserialize plain alarm profile (usually from store) into workable alarm profile */
+export const rehydrateAlarmProfile = (
+  profile: PlainAlarmProfile
+): AlarmProfile => ({
+  ...profile,
+  start: new Date(profile.start),
+});
+
+/** Serialize alarm profile so that it can be stored in the store */
+export const serializeAlarmProfile = (
+  profile: AlarmProfile
+): PlainAlarmProfile => ({
+  ...profile,
+  start: profile.start.toISOString(),
 });

@@ -2,6 +2,8 @@ import { Container, Box, useTheme } from "@mui/material";
 import { MainClock } from "./MainClock";
 import { MainDay } from "./MainDay";
 import { DrawerHeader } from "../drawer";
+import { useAlarm } from "../alarm/hooks";
+import { useAppSelector } from "@/hooks/store";
 
 export type MainProps = {
   drawerWidth: number;
@@ -10,6 +12,8 @@ export type MainProps = {
 
 export const Main = ({ drawerWidth, drawerOpen }: MainProps) => {
   const theme = useTheme();
+  // const timelets = useAppSelector()
+  // const alarm = useAlarm()
   return (
     <Box
       component="main"

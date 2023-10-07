@@ -3,10 +3,10 @@ import storage from "redux-persist/lib/storage";
 
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import alarmsReducer from "@/entities/alarm/alarm-slice";
+import alarmReducer from "@/entities/alarm/alarm-slice";
 
 const rootReducer = combineReducers({
-  alarms: alarmsReducer,
+  alarm: alarmReducer,
 });
 
 const persistConfig = {
