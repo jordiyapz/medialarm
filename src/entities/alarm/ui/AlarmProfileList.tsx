@@ -1,25 +1,10 @@
-import { useEffect } from "react";
 import { List } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { useAppSelector } from "@/hooks/store";
 
-import { initialAlarmProfiles } from "../config";
-import { addAlarmProfiles, removeAllAlarmProfiles } from "../alarm-slice";
-import {
-  AlarmListItem,
-  rehydrateAlarmProfile,
-  serializeAlarmProfile,
-} from "..";
+import { AlarmListItem, rehydrateAlarmProfile } from "..";
 
 const AlarmProfileList = () => {
   const alarm = useAppSelector((s) => s.alarm);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(addAlarmProfiles(initialAlarmProfiles.map(serializeAlarmProfile)));
-    return () => {
-      dispatch(removeAllAlarmProfiles());
-    };
-  }, [dispatch]);
 
   return (
     <List>
