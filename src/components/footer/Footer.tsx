@@ -5,10 +5,11 @@ import {
   Stack,
   useTheme,
 } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { NextAlarm } from "@/entities/alarm";
+
 import { pallete } from "../../theme";
 import { Credit } from "./Credit";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { NextAlarm } from "./NextAlarm";
 
 export type FooterProps = {
   open: boolean;

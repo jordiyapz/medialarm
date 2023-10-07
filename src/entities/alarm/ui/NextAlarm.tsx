@@ -1,14 +1,10 @@
-import {
-  Box, IconButton,
-  Stack,
-  Typography,
-  useTheme
-} from "@mui/material";
-import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { SkipButton } from "./SkipButton";
 
-export function NextAlarm() {
+const NextAlarm = () => {
   const theme = useTheme();
-  
+  const handleSkip = () => {};
+
   return (
     <Stack direction="row" alignItems="center">
       <Box>
@@ -43,9 +39,9 @@ export function NextAlarm() {
           </Box>
         </Stack>
       </Box>
-      <IconButton aria-label="turn-off" size="large" color="secondary">
-        <NotificationsOffIcon />
-      </IconButton>
+      <SkipButton countdown={5} onConfirm={handleSkip} />
     </Stack>
   );
-}
+};
+
+export default NextAlarm;

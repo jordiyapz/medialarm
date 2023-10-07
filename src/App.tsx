@@ -38,7 +38,7 @@ const initialAlarmProfiles = [
 }));
 
 function App() {
-  const drawer = useOpenable(true);
+  const drawer = useOpenable(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
