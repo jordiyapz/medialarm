@@ -1,10 +1,10 @@
 import { TimeDisplay } from "../TimeDisplay";
 
-import { AlarmConfig, Timelet, getDayOfWeek } from ".";
+import { AlarmConfig, AlarmProfile, getDayOfWeek } from ".";
 import { useAlarm } from "./hooks";
 
 export type AlarmProps = {
-  timetable: Timelet[];
+  timetable: AlarmProfile[];
   config: AlarmConfig;
 };
 

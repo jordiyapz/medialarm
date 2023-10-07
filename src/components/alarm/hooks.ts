@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTimer } from "react-timer-hook";
-import { AlarmConfig, Timelet, findNearestTime } from ".";
+import { AlarmConfig, AlarmProfile, findNearestTime } from ".";
 import { useAlarmAudio } from "../../hooks/audio-player";
 import ringtone from "/singing-bowl.mp3";
 
-export const useAlarm = (timetable: Timelet[], _config: AlarmConfig) => {
+export const useAlarm = (timetable: AlarmProfile[], _config: AlarmConfig) => {
   const player = useAlarmAudio(ringtone);
 
-  const [closestTime, setClosestTime] = useState<Timelet | null>(null);
+  const [closestTime, setClosestTime] = useState<AlarmProfile | null>(null);
 
   const handleTimeout = () => {
     if (closestTime) player.ring(closestTime.numOfRings);

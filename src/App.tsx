@@ -19,7 +19,7 @@ const drawerWidth = 350;
 function App() {
   // const alarmConfig: AlarmConfig = {};
 
-  // const timetable: Timelet[] = [
+  // const timetable: AlarmProfile[] = [
   //   { id: "1", time: new Date("2023-10-04T13:31:00"), numOfRings: 4 },
   //   { id: "7", time: new Date("2023-10-04T08:38:50"), numOfRings: 4 },
   //   { id: "2", time: new Date("2023-09-30T01:34:00"), numOfRings: 3 },

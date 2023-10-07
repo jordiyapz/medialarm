@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { default as counterReducer } from "./counter";
-import { default as alarmsReducer } from "./alarms";
+import { default as alarmsReducer } from "../entities/alarm/alarm-slice";
 
 export { counterReducer };
 

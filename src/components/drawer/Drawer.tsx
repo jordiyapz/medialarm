@@ -11,8 +11,11 @@ import {
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { pallete } from "@/theme";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { addAlarm, removeAllAlarms } from "@/slices/alarms";
-import { AlarmListItem, toTimelet } from "@/entities/timelet";
+import {
+  addAlarmProfiles,
+  removeAllAlarmProfiles,
+} from "@/entities/alarm/alarm-slice";
+import { AlarmListItem, rehydrateAlarmProfile } from "@/entities/alarm";
 import { DrawerHeader } from ".";
 
 export type AlarmDrawerProps = Pick<DrawerProps, "open"> & {
@@ -20,7 +23,7 @@ export type AlarmDrawerProps = Pick<DrawerProps, "open"> & {
   drawerWidth: number;
 };
 
-const alarmTimelets = [
+const initialAlarmProfiles = [
   {
     numOfRings: 3,
     start: "2023-10-07T08:00:00",
@@ -52,9 +55,9 @@ export const AlarmDrawer = ({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(addAlarm(alarmTimelets));
+    dispatch(addAlarmProfiles(initialAlarmProfiles));
     return () => {
-      dispatch(removeAllAlarms());
+      dispatch(removeAllAlarmProfiles());
     };
   }, [dispatch]);
 
@@ -81,8 +84,8 @@ export const AlarmDrawer = ({
         </Typography>
       </Box>
       <List>
-        {alarms.timelets.map(toTimelet).map((t) => (
-          <AlarmListItem timelet={t} />
+        {alarms.profiles.map(rehydrateAlarmProfile).map((t) => (
+          <AlarmListItem key={t.id} {...t} />
         ))}
       </List>
       <DrawerHeader>
