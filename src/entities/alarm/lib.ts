@@ -15,3 +15,7 @@ export const serializeAlarmProfile = (
   ...profile,
   start: profile.start.toISOString(),
 });
+
+/** Calculate whether a profile has been expired */
+export const isExpired = (profile: AlarmProfile): boolean =>
+  profile.start.getTime() < Date.now();

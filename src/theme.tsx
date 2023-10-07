@@ -5,7 +5,7 @@ export const pallete = {
   bgDrawer: "#28363E",
   grey300: "#384349",
   grey400: "#768086",
-  off: "#8D24DE",
+  off: "#CB8CFF",
 };
 
 const theme = createTheme({

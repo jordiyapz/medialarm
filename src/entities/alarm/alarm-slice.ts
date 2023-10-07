@@ -3,10 +3,12 @@ import { PlainAlarmProfile, AlarmProfileId } from "@/entities/alarm/types";
 
 interface AlarmState {
   profiles: PlainAlarmProfile[];
+  showExpired: boolean;
 }
 
 const initialState = {
   profiles: [],
+  showExpired: false,
 } as AlarmState;
 
 export const alarmSlice = createSlice({
@@ -28,10 +30,17 @@ export const alarmSlice = createSlice({
     removeAllAlarmProfiles: (state) => {
       state.profiles = [];
     },
+    setShowExpired: (state, action: PayloadAction<boolean>) => {
+      state.showExpired = action.payload;
+    },
   },
 });
 
-export const { addAlarmProfiles, removeAllAlarmProfiles, toggleAlarmProfile } =
-  alarmSlice.actions;
+export const {
+  addAlarmProfiles,
+  removeAllAlarmProfiles,
+  toggleAlarmProfile,
+  setShowExpired,
+} = alarmSlice.actions;
 
 export default alarmSlice.reducer;

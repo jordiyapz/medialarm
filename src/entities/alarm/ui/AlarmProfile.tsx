@@ -2,9 +2,9 @@ import {
   Typography,
   ListItem,
   Switch,
-  Stack,
   ListItemSecondaryAction,
   ListItemText,
+  useTheme,
 } from "@mui/material";
 import { pallete } from "@/theme";
 
@@ -13,42 +13,60 @@ import { dateFormat } from "../config";
 import { useAppDispatch } from "@/hooks/store";
 import React from "react";
 import { toggleAlarmProfile } from "@/entities/alarm/alarm-slice";
+import { isExpired } from "..";
 
 type AlarmTimeListProps = AlarmProfile;
 
 export const AlarmListItem = (profile: AlarmTimeListProps) => {
-  const dispatch = useAppDispatch();
+  const theme = useTheme();
+  const disabledColor = theme.palette.text.disabled;
+  const defaultColor = theme.palette.text.primary;
 
+  const dispatch = useAppDispatch();
   const handleSwitchToggle =
     (id: AlarmProfileId) => (_e: React.ChangeEvent, checked: boolean) => {
       dispatch(toggleAlarmProfile({ id, disabled: !checked }));
     };
 
-  const ringStr =
+  const ringText =
     profile.numOfRings > 1 ? `ring ${profile.numOfRings} times` : `ring once`;
+
+  const expired = isExpired(profile);
 
   return (
     <ListItem dense sx={{ alignItems: "stretch" }}>
       <ListItemText>
-        <Stack>
-          <Typography color={pallete.grey400}>
-            {profile.start.toLocaleDateString("en-US", dateFormat)}
-          </Typography>
-          <Typography fontSize="1.4rem" fontWeight={100}>
-            {String(profile.start.getHours()).padStart(2, "0")}:
-            {String(profile.start.getMinutes()).padStart(2, "0")}
-          </Typography>
-          <Typography color={pallete.grey400} fontWeight={100}>
-            {ringStr}
-          </Typography>
-        </Stack>
+        <Typography
+          aria-disabled={expired}
+          color={expired ? disabledColor : pallete.grey400}
+        >
+          {profile.start.toLocaleDateString("en-US", dateFormat)}
+        </Typography>
+        <Typography
+          fontSize="1.4rem"
+          fontWeight={100}
+          aria-disabled={expired}
+          color={expired ? disabledColor : defaultColor}
+        >
+          {String(profile.start.getHours()).padStart(2, "0")}:
+          {String(profile.start.getMinutes()).padStart(2, "0")}
+        </Typography>
+        <Typography
+          fontWeight={100}
+          aria-disabled={expired}
+          color={expired ? disabledColor : pallete.grey400}
+        >
+          {ringText}
+        </Typography>
       </ListItemText>
       <ListItemSecondaryAction>
-        <Switch
-          edge="end"
-          checked={!profile.disabled}
-          onChange={handleSwitchToggle(profile.id)}
-        />
+        {!expired && (
+          <Switch
+            edge="end"
+            checked={!profile.disabled}
+            onChange={handleSwitchToggle(profile.id)}
+          />
+        )}
       </ListItemSecondaryAction>
     </ListItem>
   );

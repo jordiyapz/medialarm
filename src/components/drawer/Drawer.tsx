@@ -1,6 +1,6 @@
-import { Typography, IconButton, Box, Divider } from "@mui/material";
+import { IconButton, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { AlarmProfileList } from "@/entities/alarm";
+import { AlarmProfileList, AlarmProfileHeading } from "@/entities/alarm";
 
 import { DrawerHeader } from ".";
 import { StyledDrawerProps, StyledDrawer } from "./StyledDrawerProps";
@@ -17,11 +17,7 @@ export const Drawer = ({ onClose, ...drawerProps }: DrawerProps) => {
       onClose={(_, reason) => reason === "backdropClick" && onClose()}
       anchor="right"
     >
-      <Box mx={2} mt={3}>
-        <Typography variant="h1" fontWeight={700} fontSize="1.2rem">
-          Alarm Profiles
-        </Typography>
-      </Box>
+      <AlarmProfileHeading />
       <AlarmProfileList />
       <DrawerHeader>
         <Divider />
