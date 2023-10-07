@@ -1,29 +1,27 @@
-import { Main } from "./components/main";
-import { Footer } from "./components/footer";
-import { Drawer } from "./components/drawer";
 import { Box } from "@mui/material";
-import { useState } from "react";
 
-const drawerWidth = 350;
+import { Main } from "@/components/main";
+import { Footer } from "@/components/footer";
+import { Drawer } from "@/components/drawer";
+import { useOpenable } from "@/shared/lib";
+
+import { DRAWER_WIDTH } from "./config";
 
 function App() {
-  const [open, setOpen] = useState(false);
-  const handleOpenDrawer = () => {
-    setOpen(!open);
-  };
+  const drawer = useOpenable(true);
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Main drawerWidth={drawerWidth} drawerOpen={open} />
+      <Main drawerWidth={DRAWER_WIDTH} drawerOpen={drawer.open} />
       <Footer
-        open={open}
-        drawerWidth={drawerWidth}
-        onMenuClick={handleOpenDrawer}
+        open={drawer.open}
+        drawerWidth={DRAWER_WIDTH}
+        onMenuClick={drawer.toggle}
       />
       <Drawer
-        open={open}
-        onClose={handleOpenDrawer}
-        drawerWidth={drawerWidth}
+        open={drawer.open}
+        onClose={drawer.toggle}
+        drawerWidth={DRAWER_WIDTH}
       />
     </Box>
   );
