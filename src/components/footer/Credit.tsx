@@ -1,9 +1,9 @@
-import { Stack, Typography, useTheme } from "@mui/material";
+import { Stack, Typography, useTheme, StackProps } from "@mui/material";
 
-export function Credit() {
+export function Credit(props: StackProps) {
   const theme = useTheme();
   return (
-    <Stack direction="row" justifyContent="space-between">
+    <Stack direction="row" justifyContent="space-between" {...props}>
       <Typography fontSize=".8rem" color={theme.palette.text.secondary}>
         Made with 💖 by Jordi Yaputra
       </Typography>

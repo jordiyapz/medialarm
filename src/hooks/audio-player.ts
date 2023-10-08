@@ -14,7 +14,7 @@ export const useAlarmAudio = (src: string) => {
       loop: true,
       onend: handleEnd,
     });
-  }, [player.load]);
+  }, [player, src]);
 
   useEffect(() => {
     if (loopCt > 0) {

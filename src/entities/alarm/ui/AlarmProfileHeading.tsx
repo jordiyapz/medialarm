@@ -1,9 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { Typography, Stack, Button } from "@mui/material";
-import { setShowExpired } from "../alarm-slice";
+
+import { selectAlarm, setShowExpired } from "../alarm-slice";
+import AddProfileButton from "./AddProfileButton";
 
 const AlarmProfileHeading = () => {
-  const alarm = useAppSelector((s) => s.alarm);
+  const alarm = useAppSelector(selectAlarm);
   const dispatch = useAppDispatch();
   const handleToggleShowExpired = () => {
     dispatch(setShowExpired(!alarm.showExpired));
@@ -19,6 +21,7 @@ const AlarmProfileHeading = () => {
       <Typography variant="h1" fontWeight={700} fontSize="1.2rem">
         Alarm Profiles
       </Typography>
+      <AddProfileButton />
       <Button
         variant="outlined"
         size="small"

@@ -1,10 +1,4 @@
-import {
-  AppBar,
-  Container,
-  IconButton,
-  Stack,
-  useTheme,
-} from "@mui/material";
+import { AppBar, Container, IconButton, Stack, useTheme } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { NextAlarm } from "@/entities/alarm";
 

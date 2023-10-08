@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-export const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerFooter = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
@@ -8,3 +8,5 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-start",
 }));
+
+export default DrawerFooter;

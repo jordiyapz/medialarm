@@ -1,2 +1,2 @@
 export * from "./Drawer";
-export * from "./DrawerHeader";
+export { default as DrawerFooter } from "./DrawerFooter";

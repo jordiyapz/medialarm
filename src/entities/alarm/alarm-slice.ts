@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { PlainAlarmProfile, AlarmProfileId } from "@/entities/alarm/types";
+import { RootState } from "@/store";
 
 interface AlarmState {
   profiles: PlainAlarmProfile[];
@@ -42,5 +43,8 @@ export const {
   toggleAlarmProfile,
   setShowExpired,
 } = alarmSlice.actions;
+
+export const selectAlarm = (s: RootState) => s.alarm;
+export const selectAlarmProfiles = (s: RootState) => s.alarm.profiles;
 
 export default alarmSlice.reducer;

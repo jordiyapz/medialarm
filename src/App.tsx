@@ -20,11 +20,15 @@ const initialAlarmProfiles = [
     start: "2023-10-07T08:00:00",
   },
   {
+    numOfRings: 3,
+    start: "2023-10-15T14:10:00",
+  },
+  {
     start: "2023-10-08T11:10:00",
   },
   {
+    start: "2023-10-08T01:21:00",
     numOfRings: 3,
-    start: "2023-10-15T14:10:00",
   },
   {
     numOfRings: 4,
@@ -38,7 +42,7 @@ const initialAlarmProfiles = [
 }));
 
 function App() {
-  const drawer = useOpenable(false);
+  const drawer = useOpenable(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

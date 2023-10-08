@@ -2,8 +2,9 @@ import { IconButton, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { AlarmProfileList, AlarmProfileHeading } from "@/entities/alarm";
 
-import { DrawerHeader } from ".";
-import { StyledDrawerProps, StyledDrawer } from "./StyledDrawerProps";
+import DrawerFooter from "./DrawerFooter";
+import { DrawerContent } from "./DrawerContent";
+import { StyledDrawerProps, StyledDrawer } from "./StyledDrawer";
 
 export type DrawerProps = Pick<StyledDrawerProps, "drawerWidth" | "open"> & {
   onClose(): void;
@@ -17,14 +18,16 @@ export const Drawer = ({ onClose, ...drawerProps }: DrawerProps) => {
       onClose={(_, reason) => reason === "backdropClick" && onClose()}
       anchor="right"
     >
-      <AlarmProfileHeading />
-      <AlarmProfileList />
-      <DrawerHeader>
-        <Divider />
+      <DrawerContent>
+        <AlarmProfileHeading />
+        <AlarmProfileList />
+      </DrawerContent>
+      <Divider />
+      <DrawerFooter>
         <IconButton onClick={onClose}>
           <ChevronRightIcon />
         </IconButton>
-      </DrawerHeader>
+      </DrawerFooter>
     </StyledDrawer>
   );
 };
