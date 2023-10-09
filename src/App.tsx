@@ -6,8 +6,6 @@ import { Drawer } from "@/components/drawer";
 import { useOpenable } from "@/shared/lib";
 
 import { useAppDispatch } from "@/shared/hooks/store";
-import { useAlarmAudio } from "@/shared/hooks/audio-player";
-import { AlarmAudioContext } from "@/shared/AlarmAudioContext";
 import { useAllowAudio } from "@/shared/hooks/audio";
 
 import {
@@ -17,7 +15,6 @@ import {
 import { createProfile } from "@/entities/alarm";
 
 import { DRAWER_WIDTH } from "@/config";
-import ringtone from "/singing-bowl.mp3";
 
 const initialAlarmProfiles = [
   {
@@ -44,7 +41,6 @@ const initialAlarmProfiles = [
 function App() {
   const drawer = useOpenable(false);
   const dispatch = useAppDispatch();
-  const { loadAudio, isReady, ...player } = useAlarmAudio(ringtone);
 
   useAllowAudio();
 
@@ -56,21 +52,19 @@ function App() {
   }, [dispatch]);
 
   return (
-    <AlarmAudioContext.Provider value={{ ...player, loadAudio, isReady }}>
-      <Box sx={{ display: "flex" }}>
-        <Main drawerWidth={DRAWER_WIDTH} drawerOpen={drawer.open} />
-        <Footer
-          open={drawer.open}
-          drawerWidth={DRAWER_WIDTH}
-          onMenuClick={drawer.toggle}
-        />
-        <Drawer
-          open={drawer.open}
-          onClose={drawer.toggle}
-          drawerWidth={DRAWER_WIDTH}
-        />
-      </Box>
-    </AlarmAudioContext.Provider>
+    <Box sx={{ display: "flex" }}>
+      <Main drawerWidth={DRAWER_WIDTH} drawerOpen={drawer.open} />
+      <Footer
+        open={drawer.open}
+        drawerWidth={DRAWER_WIDTH}
+        onMenuClick={drawer.toggle}
+      />
+      <Drawer
+        open={drawer.open}
+        onClose={drawer.toggle}
+        drawerWidth={DRAWER_WIDTH}
+      />
+    </Box>
   );
 }
 

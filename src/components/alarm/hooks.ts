@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTimer } from "react-timer-hook";
 import { AlarmConfig, AlarmProfile, findNearestTime } from ".";
-import { useAlarmAudio } from "../../shared/hooks/audio-player";
 import ringtone from "/singing-bowl.mp3";
+import { useAlarmAudio } from "@/shared/hooks/alarm-audio";
 
 export const useAlarm = (timetable: AlarmProfile[], _config: AlarmConfig) => {
   const player = useAlarmAudio(ringtone);

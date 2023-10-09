@@ -1,5 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useContext, useCallback, useEffect, useState } from "react";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
+
+import { AlarmAudioContext } from "../contexts/alarm-audio";
+
+export type UseAlarmAudioReturns = ReturnType<typeof useAlarmAudio>;
 
 export const useAlarmAudio = (src: string) => {
   const [loopCt, setLoopCt] = useState(0);
@@ -34,4 +38,11 @@ export const useAlarmAudio = (src: string) => {
   };
 
   return { ...player, ring, stopRing, play, playing, stop, loadAudio };
+};
+
+export const useAlarmAudioPlayer = () => {
+  const context = useContext(AlarmAudioContext);
+  if (context === null)
+    console.error("You must wrap your app under the AlarmAudioPlayerProvider");
+  return context;
 };

@@ -3,7 +3,7 @@ import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
 import { useTimer } from "react-timer-hook";
 import { d2 } from "@/shared/lib";
-import { useAlarmAudioPlayer } from "@/shared/AlarmAudioContext";
+import { useAlarmAudioPlayer } from "@/shared/hooks/alarm-audio";
 
 import { AlarmProfile, findNextAlarm, rehydrateAlarmProfile } from "..";
 import { selectAlarmProfiles, toggleAlarmProfile } from "../alarm-slice";
