@@ -10,7 +10,7 @@ import { pallete } from "@/theme";
 
 import { AlarmProfile, AlarmProfileId } from "../types";
 import { dateFormat } from "../config";
-import { useAppDispatch } from "@/hooks/store";
+import { useAppDispatch } from "@/shared/hooks/store";
 import React from "react";
 import { toggleAlarmProfile } from "@/entities/alarm/alarm-slice";
 import { isExpired } from "..";

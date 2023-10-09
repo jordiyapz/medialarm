@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { addSecond } from "@/shared/lib";
-import { useAppDispatch } from "@/hooks/store";
+import { useAppDispatch } from "@/shared/hooks/store";
 
 import { addAlarmProfiles } from "../alarm-slice";
 import { createProfile } from "..";

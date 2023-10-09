@@ -1,5 +1,5 @@
 import { List } from "@mui/material";
-import { useAppSelector } from "@/hooks/store";
+import { useAppSelector } from "@/shared/hooks/store";
 
 import { AlarmListItem, isExpired, rehydrateAlarmProfile } from "..";
 import { useMemo } from "react";

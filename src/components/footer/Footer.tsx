@@ -11,7 +11,7 @@ import { NextAlarm } from "@/entities/alarm";
 
 import { pallete } from "../../theme";
 import { Credit } from "./Credit";
-import { useAlarmAudioPlayer } from "@/AlarmAudioContex";
+import { useAlarmAudioPlayer } from "@/shared/AlarmAudioContext";
 
 export type FooterProps = {
   open: boolean;

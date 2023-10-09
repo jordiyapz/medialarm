@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
 import { Typography, Stack, Button } from "@mui/material";
 
 import { selectAlarm, setShowExpired } from "../alarm-slice";
