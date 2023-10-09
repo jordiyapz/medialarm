@@ -3,12 +3,12 @@ import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { useTimer } from "react-timer-hook";
 import { d2 } from "@/shared/lib";
-import { useAlarmAudio } from "@/hooks/audio-player";
+import { useAlarmAudioPlayer } from "@/AlarmAudioContex";
 
 import { AlarmProfile, findNextAlarm, rehydrateAlarmProfile } from "..";
 import { selectAlarmProfiles, toggleAlarmProfile } from "../alarm-slice";
 import { SkipButton } from "./SkipButton";
-import ringtone from "/singing-bowl.mp3";
+
 
 const NextAlarm = () => {
   const theme = useTheme();
@@ -21,12 +21,12 @@ const NextAlarm = () => {
     [plainAlarmProfiles]
   );
 
-  // TODO: Make this as context so that it always alive not holded by drawer
-  // const player = useAlarmAudio(ringtone);
+  const player = useAlarmAudioPlayer();
+
   const handleExpire = () => {
     if (nextAlarm) {
       dispatch(toggleAlarmProfile({ id: nextAlarm.id, disabled: true }));
-      // player.ring(nextAlarm.numOfRings);
+      player?.ring(nextAlarm.numOfRings);
     }
     const newNext = findNextAlarm(alarmProfiles);
     setNextAlarm(newNext);

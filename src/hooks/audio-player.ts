@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
 
 export const useAlarmAudio = (src: string) => {
   const [loopCt, setLoopCt] = useState(0);
-  const player = useGlobalAudioPlayer();
-  
-  const handleEnd = () => {
-    setLoopCt((ct) => (ct ? ct - 1 : ct));
-  };
+  const { load, play, playing, stop, ...player } = useGlobalAudioPlayer();
 
-  useEffect(() => {
-    player.load(src, {
+  const handleEnd = useCallback(() => {
+    setLoopCt((ct) => (ct ? ct - 1 : ct));
+  }, []);
+
+  const loadAudio = useCallback(() => {
+    load(src, {
       loop: true,
       onend: handleEnd,
+      autoplay: false,
     });
-  }, [player, src]);
+  }, [src, handleEnd, load]);
 
   useEffect(() => {
     if (loopCt > 0) {
-      if (!player.playing) player.play();
+      if (!playing) play();
     } else {
-      player.stop();
+      stop();
     }
-  }, [loopCt, player]);
+  }, [loopCt, playing, stop, play]);
 
   const ring = (x: number) => {
     setLoopCt(x);
@@ -32,5 +33,5 @@ export const useAlarmAudio = (src: string) => {
     setLoopCt(0);
   };
 
-  return { ...player, ring, stopRing };
+  return { ...player, ring, stopRing, play, playing, stop, loadAudio };
 };

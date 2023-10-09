@@ -42,14 +42,17 @@ export const getTimeString = (date: Date): string => {
 export const newProfileId = (): AlarmProfileId => nanoid(10);
 
 /** To be used inside add alarm profiles action, receive alarm profile, returns plain alarm profile */
-export const createProfile = ({
-  start,
-  ...profile
-}: Pick<AlarmProfile, "start"> & Partial<AlarmProfile>): PlainAlarmProfile => {
-  return serializeAlarmProfile({
-    start,
-    disabled: profile.disabled ?? false,
+export const createProfile = (
+  profile: Pick<AlarmProfile | PlainAlarmProfile, "start"> &
+    Partial<AlarmProfile>
+): PlainAlarmProfile => {
+  const defaultProfileBase: Omit<AlarmProfile, "start"> = {
+    disabled: false,
     id: newProfileId(),
-    numOfRings: profile.numOfRings ?? 1,
+    numOfRings: 1,
+  };
+  return serializeAlarmProfile({
+    ...defaultProfileBase,
+    ...profile,
   });
 };

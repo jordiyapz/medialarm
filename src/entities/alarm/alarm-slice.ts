@@ -7,10 +7,10 @@ interface AlarmState {
   showExpired: boolean;
 }
 
-const initialState = {
+const initialState: AlarmState = {
   profiles: [],
   showExpired: false,
-} as AlarmState;
+};
 
 export const alarmSlice = createSlice({
   name: "alarm",
