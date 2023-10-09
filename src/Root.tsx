@@ -3,6 +3,7 @@ import { theme } from "./theme";
 import { Provider } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { store } from "./store";
+import { ConfirmProvider } from "material-ui-confirm";
 
 const Root = () => {
   return (
@@ -10,7 +11,9 @@ const Root = () => {
       <CssBaseline />
       {/* <PersistGate loading={<CircularProgress />} persistor={persistor}> */}
       <Provider store={store}>
-        <App />
+        <ConfirmProvider>
+          <App />
+        </ConfirmProvider>
       </Provider>
     </ThemeProvider>
   );

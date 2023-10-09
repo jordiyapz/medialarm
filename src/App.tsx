@@ -15,6 +15,7 @@ import { createProfile } from "./entities/alarm";
 import { useAlarmAudio } from "./hooks/audio-player";
 import { AlarmAudioContext } from "./AlarmAudioContex";
 import ringtone from "/singing-bowl.mp3";
+import { useConfirm } from "material-ui-confirm";
 
 const initialAlarmProfiles = [
   {
@@ -41,8 +42,10 @@ const initialAlarmProfiles = [
 function App() {
   const drawer = useOpenable(false);
   const dispatch = useAppDispatch();
-
+  // const confirmation = useOpenable(true);
   const player = useAlarmAudio(ringtone);
+
+  const confirm = useConfirm();
 
   useEffect(() => {
     dispatch(addAlarmProfiles(initialAlarmProfiles));
@@ -50,6 +53,30 @@ function App() {
       dispatch(removeAllAlarmProfiles());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    confirm({
+      title: "Allow this app to play audio?",
+      description:
+        "In order that this application can play the alarm sound you must permit it to play audio.",
+      dialogProps: { maxWidth: "md" },
+      confirmationText: "Yes, I Allow",
+      cancellationText: "I just want to hang around",
+      allowClose: false,
+    })
+      .then(() => {
+        player.loadAudio();
+      })
+      .catch(() => {
+        confirm({
+          title: "Understandable.",
+          description:
+            "Please enable audio playback anytime from the button below to the left. Have a good day!",
+          dialogProps: { maxWidth: "xs" },
+          hideCancelButton: true,
+        });
+      });
+  }, []);
 
   return (
     <AlarmAudioContext.Provider value={player}>
