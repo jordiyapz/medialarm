@@ -1,22 +1,20 @@
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
-import { Button } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { selectAlarm, setShowExpired } from "../alarm-slice";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 export function ToggleExpiredButton() {
-  const alarm = useAppSelector(selectAlarm);
+  const { showExpired } = useAppSelector(selectAlarm);
   const dispatch = useAppDispatch();
   const handleToggleShowExpired = () => {
-    dispatch(setShowExpired(!alarm.showExpired));
+    dispatch(setShowExpired(!showExpired));
   };
 
   return (
-    <Button
-      variant="outlined"
-      size="small"
-      color="secondary"
-      onClick={handleToggleShowExpired}
-    >
-      {alarm.showExpired ? "Hide" : "Show"} Expired
-    </Button>
+    <Tooltip title={`${showExpired ? "Hide" : "Show"} expired profiles`}>
+      <IconButton color="secondary" onClick={handleToggleShowExpired}>
+        {showExpired ? <VisibilityOffIcon /> : <VisibilityIcon />}
+      </IconButton>
+    </Tooltip>
   );
 }

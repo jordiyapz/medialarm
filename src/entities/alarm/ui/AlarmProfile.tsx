@@ -1,13 +1,12 @@
 import React from "react";
 import {
+  ListItemButton,
+  ListItemText,
   Typography,
   ListItem,
   Switch,
-  ListItemSecondaryAction,
-  ListItemText,
   useTheme,
   Stack,
-  ListItemButton,
 } from "@mui/material";
 import { pallete } from "@/theme";
 import { useAppDispatch } from "@/shared/hooks/store";

@@ -1,15 +1,15 @@
 import { IconButton, Tooltip } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import AlarmAddIcon from "@mui/icons-material/AlarmAdd";
 
 import { useProfileForm } from "../hooks";
 
 const AddProfileButton = () => {
   const profileForm = useProfileForm();
   return (
-    <Tooltip title={`Add alarm profile`}>
+    <Tooltip title={`${profileForm.isOpen ? "Cancel" : "Add alarm profile"}`}>
       <IconButton onClick={profileForm.toggle}>
-        {profileForm.isOpen ? <CloseIcon /> : <AddIcon />}
+        {profileForm.isOpen ? <CloseIcon /> : <AlarmAddIcon color="primary" />}
       </IconButton>
     </Tooltip>
   );

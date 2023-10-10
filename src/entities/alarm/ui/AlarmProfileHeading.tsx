@@ -16,8 +16,10 @@ const AlarmProfileHeading = () => {
       <Typography variant="h1" fontWeight={700} fontSize="1.2rem">
         Alarm Profiles
       </Typography>
-      {!isEditing && <AddProfileButton />}
-      <ToggleExpiredButton />
+      <Stack direction="row">
+        <ToggleExpiredButton />
+        {!isEditing && <AddProfileButton />}
+      </Stack>
     </Stack>
   );
 };

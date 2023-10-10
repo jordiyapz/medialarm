@@ -5,14 +5,18 @@ export const pallete = {
   bgDrawer: "#28363E",
   grey300: "#384349",
   grey400: "#768086",
-  off: "#CB8CFF",
+  secondary: "#CB8CFF",
+  primary: "#FF9345",
 };
 
 const theme = createTheme({
   palette: {
     mode: "dark",
+    primary: {
+      main: pallete.primary,
+    },
     secondary: {
-      main: pallete.off,
+      main: pallete.secondary,
     },
     text: {
       disabled: pallete.grey300,
