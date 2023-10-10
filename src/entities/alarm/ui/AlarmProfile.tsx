@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Typography,
   ListItem,
@@ -5,14 +6,14 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   useTheme,
+  Stack,
 } from "@mui/material";
 import { pallete } from "@/theme";
+import { useAppDispatch } from "@/shared/hooks/store";
+import { toggleAlarmProfile } from "@/entities/alarm/alarm-slice";
 
 import { AlarmProfile, AlarmProfileId } from "../types";
 import { dateFormat } from "../config";
-import { useAppDispatch } from "@/shared/hooks/store";
-import React from "react";
-import { toggleAlarmProfile } from "@/entities/alarm/alarm-slice";
 import { isExpired } from "..";
 
 type AlarmTimeListProps = AlarmProfile;
@@ -42,15 +43,18 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
         >
           {profile.start.toLocaleDateString("en-US", dateFormat)}
         </Typography>
-        <Typography
-          fontSize="1.4rem"
-          fontWeight={100}
-          aria-disabled={expired}
-          color={expired ? disabledColor : defaultColor}
-        >
-          {String(profile.start.getHours()).padStart(2, "0")}:
-          {String(profile.start.getMinutes()).padStart(2, "0")}
-        </Typography>
+        <Stack direction="row" alignItems="center" gap={2}>
+          <Typography
+            fontSize="1.4rem"
+            fontWeight={100}
+            aria-disabled={expired}
+            color={expired ? disabledColor : defaultColor}
+          >
+            {String(profile.start.getHours()).padStart(2, "0")}:
+            {String(profile.start.getMinutes()).padStart(2, "0")}
+          </Typography>
+          <Typography color={pallete.grey400}>{profile.name}</Typography>
+        </Stack>
         <Typography
           fontWeight={100}
           aria-disabled={expired}

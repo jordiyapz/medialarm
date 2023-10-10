@@ -4,6 +4,7 @@ import { useAppSelector } from "@/shared/hooks/store";
 import { AlarmListItem, isExpired, rehydrateAlarmProfile } from "..";
 import { useMemo } from "react";
 import { selectAlarm } from "../alarm-slice";
+import AlarmProfileForm from "./AlarmProfileForm";
 
 const AlarmProfileList = () => {
   const alarm = useAppSelector(selectAlarm);
@@ -15,9 +16,10 @@ const AlarmProfileList = () => {
     }
     return profiles;
   }, [alarm]);
-  
+
   return (
     <List>
+      <AlarmProfileForm />
       {sortedProfiles.map((t) => (
         <AlarmListItem key={t.id} {...t} />
       ))}

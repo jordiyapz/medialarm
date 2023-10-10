@@ -14,10 +14,10 @@ export const useAllowAudio = () => {
         title: "Allow this app to play audio?",
         description:
           "In order that this application can play the alarm sound you must permit it to play audio.",
-        dialogProps: { maxWidth: "md" },
         confirmationText: "Yes, I Allow",
         cancellationText: "I just want to hang around",
         allowClose: false,
+        dialogProps: { maxWidth: "sm" },
         confirmationButtonProps: { autoFocus: true },
       })
         .then(loadAudio)

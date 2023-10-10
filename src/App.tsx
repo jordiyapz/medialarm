@@ -14,7 +14,7 @@ import {
 } from "@/entities/alarm/alarm-slice";
 import { createProfile } from "@/entities/alarm";
 
-import { DRAWER_WIDTH } from "@/config";
+import { DEFAULT_DRAWER_OPEN, DRAWER_WIDTH } from "@/config";
 
 const initialAlarmProfiles = [
   {
@@ -39,7 +39,7 @@ const initialAlarmProfiles = [
 ].map(createProfile);
 
 function App() {
-  const drawer = useOpenable(false);
+  const drawer = useOpenable(DEFAULT_DRAWER_OPEN);
   const dispatch = useAppDispatch();
 
   useAllowAudio();
