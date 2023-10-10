@@ -48,9 +48,10 @@ export const alarmSlice = createSlice({
       const index = state.profiles.findIndex(
         (profile) => profile.id === action.payload.id
       );
+      if (index === -1) return;
+
       const profile = state.profiles[index];
 
-      // Update the profile
       state.profiles[index] = {
         id: profile.id,
         disabled: action.payload.disabled ?? profile.disabled,
@@ -58,6 +59,14 @@ export const alarmSlice = createSlice({
         start: action.payload.start ?? profile.start,
         name: action.payload.name ?? profile.name,
       };
+    },
+    deleteAlarmProfile: (state, action: PayloadAction<AlarmProfileId>) => {
+      const index = state.profiles.findIndex(
+        (profile) => profile.id === action.payload
+      );
+      if (index !== -1) {
+        state.profiles.splice(index, 1);
+      }
     },
     removeAllAlarmProfiles: (state) => {
       state.profiles = [];
@@ -87,6 +96,7 @@ export const {
   addAlarmProfile,
   addAlarmProfiles,
   updateAlarmProfile,
+  deleteAlarmProfile,
   removeAllAlarmProfiles,
   setAlarmDisabled,
   setShowExpired,

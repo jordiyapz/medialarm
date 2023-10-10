@@ -7,10 +7,15 @@ import {
   Switch,
   useTheme,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { pallete } from "@/theme";
 import { useAppDispatch } from "@/shared/hooks/store";
-import { setAlarmDisabled } from "@/entities/alarm/alarm-slice";
+import {
+  deleteAlarmProfile,
+  setAlarmDisabled,
+} from "@/entities/alarm/alarm-slice";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { AlarmProfile, AlarmProfileId } from "../types";
 import { dateFormat } from "../config";
@@ -23,19 +28,24 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
   const theme = useTheme();
   const disabledColor = theme.palette.text.disabled;
   const defaultColor = theme.palette.text.primary;
+
   const profileForm = useProfileForm();
   const dispatch = useAppDispatch();
-  const handleSwitchToggle =
-    (id: AlarmProfileId) => (_e: React.ChangeEvent, checked: boolean) => {
-      dispatch(setAlarmDisabled({ id, disabled: !checked }));
-    };
 
   const ringText =
     profile.numOfRings > 1 ? `ring ${profile.numOfRings} times` : `ring once`;
 
   const expired = isExpired(profile);
-  const handleClick = () => {
+
+  const handleSwitchToggle =
+    (id: AlarmProfileId) => (_e: React.ChangeEvent, checked: boolean) => {
+      dispatch(setAlarmDisabled({ id, disabled: !checked }));
+    };
+  const handleEdit = () => {
     profileForm.edit(profile.id);
+  };
+  const handleDelete = () => {
+    dispatch(deleteAlarmProfile(profile.id));
   };
 
   return (
@@ -44,7 +54,11 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
       dense
       sx={{ alignItems: "stretch" }}
       secondaryAction={
-        !expired && (
+        expired ? (
+          <IconButton color="secondary" onClick={handleDelete}>
+            <DeleteIcon />
+          </IconButton>
+        ) : (
           <Switch
             edge="end"
             checked={!profile.disabled}
@@ -53,7 +67,7 @@ export const AlarmListItem = (profile: AlarmTimeListProps) => {
         )
       }
     >
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton onClick={handleEdit}>
         <ListItemText disableTypography>
           <Typography
             aria-disabled={expired}
