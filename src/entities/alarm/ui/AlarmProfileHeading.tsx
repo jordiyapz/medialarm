@@ -1,16 +1,9 @@
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 
-import { selectAlarm, setShowExpired } from "../alarm-slice";
 import AddProfileButton from "./AddProfileButton";
+import { ToggleExpiredButton } from "./ToggleExpiredButton";
 
 const AlarmProfileHeading = () => {
-  const alarm = useAppSelector(selectAlarm);
-  const dispatch = useAppDispatch();
-  const handleToggleShowExpired = () => {
-    dispatch(setShowExpired(!alarm.showExpired));
-  };
-
   return (
     <Stack
       direction="row"
@@ -22,14 +15,7 @@ const AlarmProfileHeading = () => {
         Alarm Profiles
       </Typography>
       <AddProfileButton />
-      <Button
-        variant="outlined"
-        size="small"
-        color="secondary"
-        onClick={handleToggleShowExpired}
-      >
-        {alarm.showExpired ? "Hide" : "Show"} Expired
-      </Button>
+      <ToggleExpiredButton />
     </Stack>
   );
 };

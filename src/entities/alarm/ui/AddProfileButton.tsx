@@ -1,24 +1,15 @@
 import { IconButton, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { addSecond } from "@/shared/lib";
-import { useAppDispatch } from "@/shared/hooks/store";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { addAlarmProfiles } from "../alarm-slice";
-import { createProfile } from "..";
-
-const sec = 3;
+import { useProfileForm } from "../hooks";
 
 const AddProfileButton = () => {
-  const dispatch = useAppDispatch();
-  const handleAddProfile = () => {
-    dispatch(
-      addAlarmProfiles([createProfile({ start: addSecond(new Date(), sec) })])
-    );
-  };
+  const profileForm = useProfileForm();
   return (
-    <Tooltip title={`Add ${sec} seconds alarm profile`}>
-      <IconButton onClick={handleAddProfile}>
-        <AddIcon />
+    <Tooltip title={`Add alarm profile`}>
+      <IconButton onClick={profileForm.toggle}>
+        {profileForm.isOpen ? <CloseIcon /> : <AddIcon />}
       </IconButton>
     </Tooltip>
   );

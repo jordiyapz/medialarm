@@ -5,9 +5,11 @@ import { AlarmListItem, isExpired, rehydrateAlarmProfile } from "..";
 import { useMemo } from "react";
 import { selectAlarm } from "../alarm-slice";
 import AlarmProfileForm from "./AlarmProfileForm";
+import { useProfileForm } from "../hooks";
 
 const AlarmProfileList = () => {
   const alarm = useAppSelector(selectAlarm);
+  const profileForm = useProfileForm();
   const sortedProfiles = useMemo(() => {
     let profiles = [...alarm.profiles.map(rehydrateAlarmProfile)];
     profiles.sort((a, b) => a.start.getTime() - b.start.getTime());
@@ -19,7 +21,8 @@ const AlarmProfileList = () => {
 
   return (
     <List>
-      <AlarmProfileForm />
+      {profileForm.isOpen && <AlarmProfileForm />}
+      {/* <AlarmProfileForm values={sortedProfiles[0]} edit /> */}
       {sortedProfiles.map((t) => (
         <AlarmListItem key={t.id} {...t} />
       ))}

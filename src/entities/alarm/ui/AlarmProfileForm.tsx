@@ -1,4 +1,4 @@
-import { Box, Button, Card, ListItem, Stack, TextField } from "@mui/material";
+import { Button, Card, ListItem, Stack } from "@mui/material";
 import { Form, Formik, FormikConfig } from "formik";
 import { AlarmProfile, createProfile } from "..";
 import FMTextField from "@/shared/ui/FMTextField";
@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { useEffect, useMemo, useRef } from "react";
 import { useAppDispatch } from "@/shared/hooks/store";
 import { addAlarmProfiles } from "../alarm-slice";
+import { useProfileForm } from "../hooks";
 
 interface AlarmProfileValues
   extends Pick<Required<AlarmProfile>, "name" | "numOfRings"> {
@@ -15,9 +16,16 @@ interface AlarmProfileValues
 
 type AlarmProfileFormProps = {
   values?: Partial<AlarmProfile>;
+  edit?: boolean;
 };
 
-const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
+const AlarmProfileForm = ({
+  values = {},
+  edit = false,
+}: AlarmProfileFormProps) => {
+  const profileForm = useProfileForm();
+  const dispatch = useAppDispatch();
+
   const initialValues = useMemo(() => {
     const today = new Date();
     const dateVal = dayjs(values.start ?? today);
@@ -30,21 +38,12 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
     return initialValues;
   }, [values]);
 
-  const dispatch = useAppDispatch();
-
   const nameRef = useRef<HTMLInputElement>(null);
-
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
       // Do something
     }
   };
-
-  useEffect(() => {
-    if (nameRef.current)
-      window.addEventListener("keyup", handleKeyPress, false);
-  }, [nameRef]);
-
   const handleSubmit: FormikConfig<AlarmProfileValues>["onSubmit"] = (
     values,
     { setSubmitting }
@@ -59,9 +58,13 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
       ).toDate(),
     });
     dispatch(addAlarmProfiles([newProfile]));
-    console.debug(newProfile);
     setSubmitting(false);
   };
+
+  useEffect(() => {
+    if (nameRef.current)
+      window.addEventListener("keyup", handleKeyPress, false);
+  }, [nameRef]);
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -99,14 +102,16 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
               <FMTextField
                 ref={nameRef}
                 name="name"
-                placeholder="Alarm name"
+                label="Alarm name (optional)"
                 size="small"
                 sx={{ flex: 2 }}
               />
             </Stack>
             <Stack direction="row">
-              <Button color="inherit">Cancel</Button>
-              <Button type="submit">Save</Button>
+              <Button color="inherit" onClick={profileForm.close}>
+                Close
+              </Button>
+              <Button type="submit">{edit ? "Update" : "Add"}</Button>
             </Stack>
           </Card>
         </ListItem>

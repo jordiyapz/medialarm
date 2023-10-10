@@ -5,11 +5,13 @@ import { RootState } from "@/store";
 interface AlarmState {
   profiles: PlainAlarmProfile[];
   showExpired: boolean;
+  showForm: boolean;
 }
 
 const initialState: AlarmState = {
   profiles: [],
   showExpired: false,
+  showForm: false,
 };
 
 export const alarmSlice = createSlice({
@@ -28,6 +30,9 @@ export const alarmSlice = createSlice({
         alarm.disabled = action.payload.disabled;
       }
     },
+    setShowForm: (state, action: PayloadAction<boolean>) => {
+      state.showForm = action.payload;
+    },
     removeAllAlarmProfiles: (state) => {
       state.profiles = [];
     },
@@ -42,9 +47,11 @@ export const {
   removeAllAlarmProfiles,
   toggleAlarmProfile,
   setShowExpired,
+  setShowForm,
 } = alarmSlice.actions;
 
 export const selectAlarm = (s: RootState) => s.alarm;
 export const selectAlarmProfiles = (s: RootState) => s.alarm.profiles;
+export const selectShowAlarmForm = (s: RootState) => s.alarm.showForm;
 
 export default alarmSlice.reducer;
