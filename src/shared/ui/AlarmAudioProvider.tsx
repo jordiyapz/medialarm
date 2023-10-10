@@ -1,6 +1,7 @@
 import { useAlarmAudio } from "../hooks/alarm-audio";
-import ringtone from "/singing-bowl.mp3";
 import { AlarmAudioContext } from "../contexts/alarm-audio";
+import ringtone from "/singing-bowl.mp3";
+import { alarmConfig } from "@/config";
 
 type AlarmAudioPlayerProviderProps = {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ type AlarmAudioPlayerProviderProps = {
 const AlarmAudioPlayerProvider = ({
   children,
 }: AlarmAudioPlayerProviderProps) => {
-  const player = useAlarmAudio(ringtone);
+  const player = useAlarmAudio(ringtone, alarmConfig);
   return (
     <AlarmAudioContext.Provider value={player}>
       {children}

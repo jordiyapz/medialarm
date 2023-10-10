@@ -3,10 +3,12 @@ import { AudioLoadOptions, useGlobalAudioPlayer } from "react-use-audio-player";
 
 import { AlarmAudioContext } from "../contexts/alarm-audio";
 
-export interface AudioConfig extends AudioLoadOptions {}
+export interface AudioConfig
+  extends Omit<AudioLoadOptions, "loop" | "onend" | "autoplay"> {}
+
 export type UseAlarmAudioReturns = ReturnType<typeof useAlarmAudio>;
 
-export const useAlarmAudio = (src: string, config: AudioConfig = {}) => {
+export const useAlarmAudio = (src: string, config?: AudioConfig) => {
   const [loopCt, setLoopCt] = useState(0);
   const { load, play, playing, stop, ...player } = useGlobalAudioPlayer();
 
@@ -16,10 +18,10 @@ export const useAlarmAudio = (src: string, config: AudioConfig = {}) => {
 
   const loadAudio = useCallback(() => {
     load(src, {
+      ...config,
       loop: true,
       onend: handleEnd,
       autoplay: false,
-      ...config,
     });
   }, [src, handleEnd, load, config]);
 
