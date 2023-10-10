@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { Button, List, ListItem } from "@mui/material";
 import { useAppSelector } from "@/shared/hooks/store";
 
 import { AlarmListItem, isExpired, rehydrateAlarmProfile } from "..";
@@ -18,15 +18,27 @@ const AlarmProfileList = () => {
     }
     return profiles;
   }, [alarm]);
+  
+  const isEmpty = !sortedProfiles.length;
 
   return (
     <List>
       {profileForm.isOpen && profileForm.item === null && <AlarmProfileForm />}
-      {sortedProfiles.map((t) => t.id === profileForm.item ? (
-        <AlarmProfileForm key={t.id} values={t} />
-      ):(
-        <AlarmListItem key={t.id} {...t} />
-      ))}
+      {isEmpty
+        ? !profileForm.isOpen && (
+            <ListItem sx={{ display: "flex", flexDirection: "column" }}>
+              <Button variant="outlined" onClick={profileForm.open}>
+                Add new alarm profile
+              </Button>
+            </ListItem>
+          )
+        : sortedProfiles.map((t) =>
+            t.id === profileForm.item ? (
+              <AlarmProfileForm key={t.id} values={t} />
+            ) : (
+              <AlarmListItem key={t.id} {...t} />
+            )
+          )}
     </List>
   );
 };

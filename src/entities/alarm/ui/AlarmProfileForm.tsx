@@ -16,8 +16,6 @@ interface AlarmProfileValues
 
 type AlarmProfileFormProps = {
   values?: Partial<AlarmProfile>;
-  /** @deprecated no effect */
-  edit?: boolean;
 };
 
 const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
@@ -25,7 +23,7 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
   const dispatch = useAppDispatch();
 
   const initialValues = useMemo(() => {
-    const today = new Date();
+    const today = dayjs().add(1, "minute");
     const dateVal = dayjs(values.start ?? today);
     const initialValues: AlarmProfileValues = {
       date: dateVal.format("YYYY-MM-DD"),
@@ -51,7 +49,7 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
     if (profileForm.isEditing) {
       dispatch(
         updateAlarmProfile({
-          id: profileForm.item as string,  // because the state is editing, means item is not null.
+          id: profileForm.item as string, // because the state is editing, means item is not null.
           ...serializeAlarmProfile({ ...rest, start: newDate }),
         })
       );
