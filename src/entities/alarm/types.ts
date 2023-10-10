@@ -1,3 +1,5 @@
+import { AudioConfig } from "@/shared/hooks/alarm-audio";
+
 export type AlarmProfileId = string;
 
 export interface AlarmProfileBase {
@@ -14,4 +16,4 @@ export interface AlarmProfile extends AlarmProfileBase {
   start: Date;
 }
 
-export interface AlarmConfig {}
+export interface AlarmConfig extends AudioConfig {}
