@@ -1,8 +1,8 @@
-import { Timelet } from ".";
+import { AlarmProfile } from ".";
 
-/** return the closest time between timelets */
-export const findNearestTime = (timelets: Timelet[]) => {
-  const epochs = timelets.map((t) => t.time.getTime());
+/** return the closest time between profiles */
+export const findNearestTime = (profiles: AlarmProfile[]) => {
+  const epochs = profiles.map((t) => t.start.getTime());
   const currentEpoch = new Date().getTime();
   const deltas = epochs
     .map((e) => e - currentEpoch)
@@ -12,7 +12,7 @@ export const findNearestTime = (timelets: Timelet[]) => {
     smallestDelta == Infinity
       ? null
       : deltas.findIndex((d) => d == smallestDelta);
-  const closestTime = nearestTimeId !== null ? timelets[nearestTimeId] : null;
+  const closestTime = nearestTimeId !== null ? profiles[nearestTimeId] : null;
   return closestTime;
 };
 
