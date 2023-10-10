@@ -6,7 +6,7 @@ import { d2 } from "@/shared/lib";
 import { useAlarmAudioPlayer } from "@/shared/hooks/alarm-audio";
 
 import { AlarmProfile, findNextAlarm, rehydrateAlarmProfile } from "..";
-import { selectAlarmProfiles, toggleAlarmProfile } from "../alarm-slice";
+import { selectAlarmProfiles, setAlarmDisabled } from "../alarm-slice";
 import { SkipButton } from "./SkipButton";
 
 
@@ -25,7 +25,7 @@ const NextAlarm = () => {
 
   const handleExpire = () => {
     if (nextAlarm) {
-      dispatch(toggleAlarmProfile({ id: nextAlarm.id, disabled: true }));
+      dispatch(setAlarmDisabled({ id: nextAlarm.id, disabled: true }));
       player?.ring(nextAlarm.numOfRings);
     }
     const newNext = findNextAlarm(alarmProfiles);
@@ -51,7 +51,7 @@ const NextAlarm = () => {
 
   const handleSkip = () => {
     if (nextAlarm)
-      dispatch(toggleAlarmProfile({ id: nextAlarm.id, disabled: true }));
+      dispatch(setAlarmDisabled({ id: nextAlarm.id, disabled: true }));
   };
 
   return (

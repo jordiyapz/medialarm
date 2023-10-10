@@ -21,9 +21,11 @@ const AlarmProfileList = () => {
 
   return (
     <List>
-      {profileForm.isOpen && <AlarmProfileForm />}
+      {profileForm.isOpen && profileForm.item === null && <AlarmProfileForm />}
       {/* <AlarmProfileForm values={sortedProfiles[0]} edit /> */}
-      {sortedProfiles.map((t) => (
+      {sortedProfiles.map((t) => t.id === profileForm.item ? (
+        <AlarmProfileForm values={t} />
+      ):(
         <AlarmListItem key={t.id} {...t} />
       ))}
     </List>

@@ -1,11 +1,11 @@
 import { Button, Card, ListItem, Stack } from "@mui/material";
 import { Form, Formik, FormikConfig } from "formik";
-import { AlarmProfile, createProfile } from "..";
+import { AlarmProfile, createProfile, serializeAlarmProfile } from "..";
 import FMTextField from "@/shared/ui/FMTextField";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useRef } from "react";
 import { useAppDispatch } from "@/shared/hooks/store";
-import { addAlarmProfiles } from "../alarm-slice";
+import { addAlarmProfiles, updateAlarmProfile } from "../alarm-slice";
 import { useProfileForm } from "../hooks";
 
 interface AlarmProfileValues
@@ -16,13 +16,11 @@ interface AlarmProfileValues
 
 type AlarmProfileFormProps = {
   values?: Partial<AlarmProfile>;
+  /** @deprecated no effect */
   edit?: boolean;
 };
 
-const AlarmProfileForm = ({
-  values = {},
-  edit = false,
-}: AlarmProfileFormProps) => {
+const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
   const profileForm = useProfileForm();
   const dispatch = useAppDispatch();
 
@@ -48,16 +46,23 @@ const AlarmProfileForm = ({
     values,
     { setSubmitting }
   ) => {
-    const { numOfRings, name } = values;
-    const newProfile = createProfile({
-      numOfRings,
-      name,
-      start: dayjs(
-        `${values.date} ${values.time}`,
-        "YYYY-MM-DD HH:mm"
-      ).toDate(),
-    });
-    dispatch(addAlarmProfiles([newProfile]));
+    const { date, time, ...rest } = values;
+    const newDate = dayjs(`${date} ${time}`, "YYYY-MM-DD HH:mm").toDate();
+    if (profileForm.isEditing) {
+      dispatch(
+        updateAlarmProfile({
+          id: profileForm.item as string,  // because the state is editing, means item is not null.
+          ...serializeAlarmProfile({ ...rest, start: newDate }),
+        })
+      );
+      profileForm.close();
+    } else {
+      const newProfile = createProfile({
+        ...rest,
+        start: newDate,
+      });
+      dispatch(addAlarmProfiles([newProfile]));
+    }
     setSubmitting(false);
   };
 
@@ -87,6 +92,7 @@ const AlarmProfileForm = ({
               name="date"
               type="date"
               variant="outlined"
+              helperText="mm/dd/yyyy"
               size="small"
               fullWidth
             />
@@ -111,7 +117,9 @@ const AlarmProfileForm = ({
               <Button color="inherit" onClick={profileForm.close}>
                 Close
               </Button>
-              <Button type="submit">{edit ? "Update" : "Add"}</Button>
+              <Button type="submit">
+                {profileForm.isEditing ? "Update" : "Add"}
+              </Button>
             </Stack>
           </Card>
         </ListItem>

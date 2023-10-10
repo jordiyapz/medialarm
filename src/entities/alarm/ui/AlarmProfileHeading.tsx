@@ -2,8 +2,10 @@ import { Typography, Stack } from "@mui/material";
 
 import AddProfileButton from "./AddProfileButton";
 import { ToggleExpiredButton } from "./ToggleExpiredButton";
+import { useProfileForm } from "../hooks";
 
 const AlarmProfileHeading = () => {
+  const { isEditing } = useProfileForm();
   return (
     <Stack
       direction="row"
@@ -14,7 +16,7 @@ const AlarmProfileHeading = () => {
       <Typography variant="h1" fontWeight={700} fontSize="1.2rem">
         Alarm Profiles
       </Typography>
-      <AddProfileButton />
+      {!isEditing && <AddProfileButton />}
       <ToggleExpiredButton />
     </Stack>
   );
