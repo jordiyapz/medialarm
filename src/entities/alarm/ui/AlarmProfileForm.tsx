@@ -101,6 +101,7 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
                 label="#Rings"
                 type="number"
                 size="small"
+                InputProps={{ inputProps: { min: 1 } }}
                 sx={{ flex: 1 }}
               />
               <FMTextField
