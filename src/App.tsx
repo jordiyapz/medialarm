@@ -6,9 +6,11 @@ import { useOpenable } from "@/shared/lib";
 import { useAllowAudio } from "@/shared/hooks/audio";
 
 import { DEFAULT_DRAWER_OPEN, DRAWER_WIDTH } from "@/config";
+import { useFlags } from "flagsmith/react";
 
 function App() {
   const drawer = useOpenable(DEFAULT_DRAWER_OPEN);
+  const flags = useFlags(["sponsorship"]);
 
   useAllowAudio();
 
@@ -24,6 +26,8 @@ function App() {
         open={drawer.open}
         onClose={drawer.toggle}
         drawerWidth={DRAWER_WIDTH}
+        enableSponsorship={flags.sponsorship.enabled}
+        sponsorshipLink={flags.sponsorship.value as string | undefined}
       />
     </Box>
   );
