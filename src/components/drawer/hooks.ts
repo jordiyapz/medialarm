@@ -1,6 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useOpenable } from "@/shared/lib";
-import { DefaultDrawerState } from "@/components/drawer/types";
+import { DefaultDrawerState } from ".";
 
 export const useDrawerState = (defaultState: DefaultDrawerState) => {
   const theme = useTheme();

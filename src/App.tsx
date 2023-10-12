@@ -3,12 +3,10 @@ import { Box } from "@mui/material";
 
 import { Main } from "@/components/main";
 import { Footer } from "@/components/footer";
-import { Drawer } from "@/components/drawer";
+import { Drawer, useDrawerState } from "@/components/drawer";
 import { useAllowAudio } from "@/shared/hooks/audio";
 
 import { DEFAULT_DRAWER_OPEN, DRAWER_WIDTH } from "@/config";
-
-import { useDrawerState } from "./components/drawer/hooks";
 
 function App() {
   const flags = useFlags(["sponsorship"]);
