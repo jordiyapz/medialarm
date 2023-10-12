@@ -15,7 +15,7 @@ export function MainDay() {
   }, [time.hours]);
 
   return (
-    <Stack direction="row" gap={3} justifyContent="center">
+    <Stack direction="row" gap={3} justifyContent="center" flexWrap="wrap">
       {days.map((d, i) => (
         <Daylet key={d} active={i === activeDay}>
           {d}

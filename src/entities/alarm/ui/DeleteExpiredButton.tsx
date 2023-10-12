@@ -3,7 +3,12 @@ import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
 import AutoDeleteIcon from "@mui/icons-material/AutoDelete";
 import { WarnIconButton } from "@/shared/ui/WarnIconButton";
 
-import { deleteAlarmProfile, selectAlarmProfiles } from "../alarm-slice";
+import {
+  deleteAlarmProfile,
+  selectAlarmProfiles,
+  setShowExpired,
+  setShowForm,
+} from "../alarm-slice";
 import { isExpired, rehydrateAlarmProfile } from "..";
 
 export function DeleteExpiredButton() {
@@ -16,6 +21,8 @@ export function DeleteExpiredButton() {
     expiredProfiles.forEach((profile) => {
       dispatch(deleteAlarmProfile(profile.id));
     });
+    dispatch(setShowForm(false));
+    dispatch(setShowExpired(false));
   };
 
   return (
