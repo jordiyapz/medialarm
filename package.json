@@ -1,7 +1,7 @@
 {
   "name": "medialarm",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,7 @@
     "@mui/material": "^5.14.12",
     "@reduxjs/toolkit": "^1.9.7",
     "dayjs": "^1.11.10",
+    "flagsmith": "^3.19.1",
     "formik": "^2.4.5",
     "formik-mui": "^5.0.0-alpha.0",
     "material-ui-confirm": "^3.0.9",
