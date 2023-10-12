@@ -88,6 +88,7 @@ export const alarmSlice = createSlice({
     },
     setShowForm: (state, action: PayloadAction<boolean>) => {
       state.form.show = action.payload;
+      state.form.item = null;
     },
   },
 });
