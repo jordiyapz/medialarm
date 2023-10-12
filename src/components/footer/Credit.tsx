@@ -1,15 +1,23 @@
-import { Stack, Typography, useTheme, StackProps } from "@mui/material";
+import { Stack, StackProps, Link } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+
+import { CreditText } from "./CreditText";
 
 export function Credit(props: StackProps) {
-  const theme = useTheme();
   return (
     <Stack direction="row" justifyContent="space-between" {...props}>
-      <Typography fontSize=".8rem" color={theme.palette.text.secondary}>
-        Made with 💖 by Jordi Yaputra
-      </Typography>
-      <Typography fontSize=".8rem" color={theme.palette.text.secondary}>
-        Version: {APP_VERSION}
-      </Typography>
+      <CreditText>
+        Made with 💖 by{" "}
+        <Link
+          href="https://github.com/jordiyapz"
+          target="_blank"
+          color="inherit"
+          rel="noopener"
+        >
+          Jordi Yaputra <GitHubIcon fontSize="inherit" color="action" />
+        </Link>
+      </CreditText>
+      <CreditText>Version: {APP_VERSION}</CreditText>
     </Stack>
   );
 }
