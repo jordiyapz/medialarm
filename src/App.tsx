@@ -1,16 +1,18 @@
+import { useFlags } from "flagsmith/react";
 import { Box } from "@mui/material";
+
 import { Main } from "@/components/main";
 import { Footer } from "@/components/footer";
 import { Drawer } from "@/components/drawer";
-import { useOpenable } from "@/shared/lib";
 import { useAllowAudio } from "@/shared/hooks/audio";
 
 import { DEFAULT_DRAWER_OPEN, DRAWER_WIDTH } from "@/config";
-import { useFlags } from "flagsmith/react";
+
+import { useDrawerState } from "./components/drawer/hooks";
 
 function App() {
-  const drawer = useOpenable(DEFAULT_DRAWER_OPEN);
   const flags = useFlags(["sponsorship"]);
+  const drawer = useDrawerState(DEFAULT_DRAWER_OPEN);
 
   useAllowAudio();
 

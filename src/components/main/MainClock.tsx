@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
-import { pallete } from "../../theme";
 import { useTime } from "react-timer-hook";
+
+import { pallete } from "../../theme";
 
 export function MainClock() {
   const time = useTime();
@@ -14,17 +15,20 @@ export function MainClock() {
     >
       <Typography
         variant="body1"
-        fontSize="13rem"
         fontWeight={100}
         lineHeight={1.3}
+        sx={{ fontSize: { md: "13rem", sm: "10rem", xs: "6rem" } }}
       >
         {time.hours}:{String(time.minutes).padStart(2, "0")}
       </Typography>
       <Typography
         variant="subtitle1"
-        fontSize="40px"
         color={pallete.grey400}
-        sx={{ position: "relative", bottom: -30 }}
+        sx={{
+          position: "relative",
+          bottom: { md: -30, xs: -20 },
+          fontSize: { md: "40px", xs: "20px" },
+        }}
       >
         {String(time.seconds).padStart(2, "0")}
       </Typography>
