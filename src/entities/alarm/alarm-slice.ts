@@ -145,6 +145,16 @@ export const alarmSlice = createSlice({
     addAlarmProfiles: (state, action: PayloadAction<PlainAlarmProfile[]>) => {
       state.profiles.push(...action.payload);
     },
+    appendAlarmProfile: (state, action: PayloadAction<PlainAlarmProfile>) => {
+      const newProfile = action.payload;
+      const existingProfileIndex = state.profiles.findIndex(
+        (profile) => profile.id === newProfile.id
+      );
+      if (existingProfileIndex === -1) state.profiles.push(newProfile);
+      else {
+        state.profiles[existingProfileIndex] = newProfile;
+      }
+    },
     updateAlarmProfile: (
       state,
       action: PayloadAction<
@@ -202,6 +212,7 @@ export const alarmSlice = createSlice({
 export const {
   addAlarmProfile,
   addAlarmProfiles,
+  appendAlarmProfile,
   updateAlarmProfile,
   deleteAlarmProfile,
   removeAllAlarmProfiles,
