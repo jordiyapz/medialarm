@@ -1,6 +1,9 @@
+import dayjs from "dayjs";
+
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/store";
 import { selectAlarmForm, setShowForm, setForm } from "./alarm-slice";
 import { AlarmProfileId } from ".";
+import { selectAlarmProfiles } from "./alarm-slice";
 
 export const useProfileForm = () => {
   const dispatch = useAppDispatch();
@@ -37,4 +40,25 @@ export const useProfileForm = () => {
     add,
     edit,
   };
+};
+
+export const useExportProfiles = () => {
+  const profiles = useAppSelector(selectAlarmProfiles);
+  const exportProfiles = () => {
+    const payload = profiles.map(({ numOfRings, start, name, id }) => ({
+      id,
+      start,
+      numOfRings,
+      name,
+    }));
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(payload, null, 2)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = `profiles_${dayjs().format("YYYY-MM-DDTHH-mm-ss")}.json`;
+    link.click();
+  };
+
+  return exportProfiles;
 };

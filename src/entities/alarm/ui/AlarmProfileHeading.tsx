@@ -1,11 +1,16 @@
 import { Typography, Stack } from "@mui/material";
 
+import { useAppSelector } from "@/shared/hooks/store";
+import MoreMenu from "@/shared/ui/MoreMenu";
+
+import { useProfileForm } from "../hooks";
+import { selectAlarm } from "../alarm-slice";
+
 import AddProfileButton from "./AddProfileButton";
 import { ToggleExpiredButton } from "./ToggleExpiredButton";
-import { useProfileForm } from "../hooks";
-import { useAppSelector } from "@/shared/hooks/store";
-import { selectAlarm } from "../alarm-slice";
 import { DeleteExpiredButton } from "./DeleteExpiredButton";
+import ExportMenuItem from "./ExportMenuItem";
+import ImportMenuItem from "./ImportMenuItem";
 
 const AlarmProfileHeading = () => {
   const { isEditing } = useProfileForm();
@@ -21,9 +26,13 @@ const AlarmProfileHeading = () => {
         Alarm Profiles
       </Typography>
       <Stack direction="row">
+        {!isEditing && <AddProfileButton />}
         {showExpired && <DeleteExpiredButton />}
         <ToggleExpiredButton />
-        {!isEditing && <AddProfileButton />}
+        <MoreMenu>
+          <ImportMenuItem />
+          <ExportMenuItem />
+        </MoreMenu>
       </Stack>
     </Stack>
   );
