@@ -20,7 +20,113 @@ interface AlarmState {
 }
 
 const initialState: AlarmState = {
-  profiles: [],
+  profiles: [
+    {
+      id: "briefing-1",
+      start: "2023-10-14T07:30:00",
+      numOfRings: 3,
+      name: "Briefing peserta",
+      disabled: false,
+    },
+    {
+      id: "precept-1",
+      start: "2023-10-14T08:00:00",
+      numOfRings: 3,
+      name: "Pengambilan sīla",
+      disabled: false,
+    },
+    {
+      id: "session-1-1",
+      start: "2023-10-14T08:10:00",
+      numOfRings: 3,
+      name: "Materi sesi 1",
+      disabled: false,
+    },
+    {
+      id: "break-1-1",
+      start: "2023-10-14T09:20:00",
+      numOfRings: 3,
+      name: "Istirahat 1",
+      disabled: false,
+    },
+    {
+      id: "session-2-1",
+      start: "2023-10-14T09:30:00",
+      numOfRings: 3,
+      name: "Materi sesi 2",
+      disabled: false,
+    },
+    {
+      id: "buddhapuja-1",
+      start: "2023-10-14T10:30:00",
+      numOfRings: 3,
+      name: "Buddhapuja",
+      disabled: false,
+    },
+    {
+      id: "lunch-1",
+      start: "2023-10-14T11:00:00",
+      numOfRings: 3,
+      name: "Makan siang",
+      disabled: false,
+    },
+    {
+      id: "session-3-1",
+      start: "2023-10-14T12:30:00",
+      numOfRings: 3,
+      name: "Materi sesi 3",
+      disabled: false,
+    },
+    {
+      id: "coffee-break-1",
+      start: "2023-10-14T14:30:00",
+      numOfRings: 3,
+      name: "Coffee break",
+      disabled: false,
+    },
+    {
+      id: "session-4-1",
+      start: "2023-10-14T15:00:00",
+      numOfRings: 3,
+      name: "Materi sesi 4",
+      disabled: false,
+    },
+    {
+      id: "break-2-1",
+      start: "2023-10-14T17:00:00",
+      numOfRings: 3,
+      name: "Istirahat 2",
+      disabled: false,
+    },
+    {
+      id: "qna-1",
+      start: "2023-10-14T17:15:00",
+      numOfRings: 3,
+      name: "Tanya-Jawab",
+      disabled: false,
+    },
+    {
+      id: "okasa-1",
+      start: "2023-10-14T18:30:00",
+      numOfRings: 3,
+      name: "Permohonan maaf (okasa)",
+      disabled: false,
+    },
+    {
+      id: "merit-1",
+      start: "2023-10-14T18:35:00",
+      numOfRings: 3,
+      name: "Pelimpahan jasa",
+      disabled: false,
+    },
+    {
+      id: "photo-1",
+      start: "2023-10-14T18:45:00",
+      numOfRings: 3,
+      name: "Foto bersama",
+      disabled: false,
+    },
+  ],
   showExpired: false,
   showForm: false,
   form: {
@@ -38,6 +144,16 @@ export const alarmSlice = createSlice({
     },
     addAlarmProfiles: (state, action: PayloadAction<PlainAlarmProfile[]>) => {
       state.profiles.push(...action.payload);
+    },
+    appendAlarmProfile: (state, action: PayloadAction<PlainAlarmProfile>) => {
+      const newProfile = action.payload;
+      const existingProfileIndex = state.profiles.findIndex(
+        (profile) => profile.id === newProfile.id
+      );
+      if (existingProfileIndex === -1) state.profiles.push(newProfile);
+      else {
+        state.profiles[existingProfileIndex] = newProfile;
+      }
     },
     updateAlarmProfile: (
       state,
@@ -96,6 +212,7 @@ export const alarmSlice = createSlice({
 export const {
   addAlarmProfile,
   addAlarmProfiles,
+  appendAlarmProfile,
   updateAlarmProfile,
   deleteAlarmProfile,
   removeAllAlarmProfiles,
