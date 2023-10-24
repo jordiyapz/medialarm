@@ -24,4 +24,5 @@ becomes general purposes event agenda reminders and have been used practically f
 <a href="https://ibb.co/99YPQQL"><img src="https://i.ibb.co/99YPQQL/IMG20231021083919.jpg" alt="IMG20231021083919" border="0"></a> 
 <a href="https://ibb.co/QjW5NMQ"><img src="https://i.ibb.co/QjW5NMQ/IMG20231021083930.jpg" alt="IMG20231021083930" border="0"></a>
 <a href="https://ibb.co/bdZzmFk"><img src="https://i.ibb.co/bdZzmFk/IMG20231021084007.jpg" alt="IMG20231021084007" border="0"></a> 
+
 Pictures: Application of Medialarm at Meditation Retreat held in Tangerang, Indonesia (Oct, 20th 2023 - Oct, 22nd 2023).
