@@ -1,27 +1,27 @@
-# React + TypeScript + Vite
+# Medialarm
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple tool for scheduling multiple time reminders.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Multiple alarm profiles
+- Customizable ring times for each profile
+- Web-based
+- Persistence configuration
+- Local storage (Fully anonimous)
+- Quick create and delete UX design
+- Minimalist User Interface (Heavily inspired by [Sleep Alarm Clock](https://apps.apple.com/us/app/sleep-alarm-clock-the-1-alarm-clock-sleep-timer/id1091149644?mt=12)
+- Export/Import-able alarm profiles configuration
+- Responsive UI
 
-## Expanding the ESLint configuration
+## Why Medialarm?
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+It's original purpose is to serve as reminders of scheduled meditation in meditation retreat events. Hence Medi-Alarm. But along the way, this piece of tool 
+becomes general purposes event agenda reminders and have been used practically for several times. 
 
-- Configure the top-level `parserOptions` property like this:
+## Medialarm in Action
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<a href="https://ibb.co/99YPQQL"><img src="https://i.ibb.co/99YPQQL/IMG20231021083919.jpg" alt="IMG20231021083919" border="0"></a> 
+<a href="https://ibb.co/QjW5NMQ"><img src="https://i.ibb.co/QjW5NMQ/IMG20231021083930.jpg" alt="IMG20231021083930" border="0"></a>
+<a href="https://ibb.co/bdZzmFk"><img src="https://i.ibb.co/bdZzmFk/IMG20231021084007.jpg" alt="IMG20231021084007" border="0"></a> 
+Pictures: Application of Medialarm at Meditation Retreat held in Tangerang, Indonesia (Oct, 20th 2023 - Oct, 22nd 2023).
