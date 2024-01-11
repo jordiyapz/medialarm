@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
   ListItem,
@@ -17,6 +16,7 @@ import {
 import { useState } from "react";
 import { appendAlarmProfile } from "../alarm-slice";
 import { PlainAlarmProfile } from "..";
+import { FileUploader } from "react-drag-drop-files";
 
 type ImportDialogProps = {
   open: boolean;
@@ -26,6 +26,25 @@ type ImportDialogProps = {
 const ImportDialog = ({ open, onClose }: ImportDialogProps) => {
   const dispatch = useAppDispatch();
   const [newProfiles, setNewProfiles] = useState<Record<string, string>[]>([]);
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileUpload = (file: File) => {
+    setFile(file);
+    const reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
+    reader.onload = function (e) {
+      if (typeof e.target?.result === "string") {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (Array.isArray(data)) {
+            setNewProfiles(data);
+          }
+        } catch (error) {
+          console.error("Unable to parse file");
+        }
+      }
+    };
+  };
   const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value) {
       const url = e.currentTarget.value;
@@ -49,17 +68,50 @@ const ImportDialog = ({ open, onClose }: ImportDialogProps) => {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Import Profile</DialogTitle>
       <DialogContent>
-        <DialogContentText>Input your file url here</DialogContentText>
-        <TextField
-          id="name"
-          autoFocus
-          variant="outlined"
-          margin="dense"
-          label="File URL"
-          type="url"
-          fullWidth
-          onChange={handleUrlChange}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            border: "2px solid gray",
+            borderRadius: 1.5,
+            mb: 2,
+            px: 1,
+            py: 1.5,
+          }}
+        >
+          <TextField
+            id="name"
+            autoFocus
+            variant="outlined"
+            margin="dense"
+            label="Input your file url here"
+            placeholder="File url (Example: https://gist.github.com/...)"
+            type="url"
+            fullWidth
+            onChange={handleUrlChange}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography color="GrayText">OR</Typography>
+          </Box>
+          <FileUploader
+            handleChange={handleFileUpload}
+            name="file"
+            types={["json"]}
+          />
+          {file?.name && (
+            <Typography color={"GrayText"} variant="caption">
+              Filename: {file.name}
+            </Typography>
+          )}
+        </Box>
         <Alert severity="warning">
           This will permanently overwrite current saved profile
         </Alert>
@@ -68,7 +120,7 @@ const ImportDialog = ({ open, onClose }: ImportDialogProps) => {
             {newProfiles.map((profile) => (
               <ListItem key={profile.id}>
                 <ListItemText
-                  primary={profile.id}
+                  primary={profile.name}
                   secondary={
                     <>
                       <Typography>Start: {profile.start}</Typography>
@@ -83,7 +135,7 @@ const ImportDialog = ({ open, onClose }: ImportDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleUpload}>Overwrite</Button>
+        <Button disabled={!newProfiles} onClick={handleUpload}>Overwrite</Button>
       </DialogActions>
     </Dialog>
   );
