@@ -11,6 +11,7 @@ const AlarmAudioPlayerProvider = ({
   children,
 }: AlarmAudioPlayerProviderProps) => {
   const player = useAlarmAudio(ringtone, alarmConfig);
+
   return (
     <AlarmAudioContext.Provider value={player}>
       {children}
