@@ -1,6 +1,7 @@
 import { useAlarmAudioPlayer } from "./alarm-audio";
 import { useConfirm } from "material-ui-confirm";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const useAllowAudio = () => {
   const player = useAlarmAudioPlayer();
@@ -20,7 +21,10 @@ export const useAllowAudio = () => {
         dialogProps: { maxWidth: "sm" },
         confirmationButtonProps: { autoFocus: true },
       })
-        .then(loadAudio)
+        .then(() => {
+          loadAudio?.();
+          toast.success("Audio enabled");
+        })
         .catch(() => {
           confirm({
             title: "Understandable.",
