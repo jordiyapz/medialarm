@@ -23,7 +23,7 @@ export const useAllowAudio = () => {
       })
         .then(() => {
           loadAudio?.();
-          toast.success("Audio enabled");
+          toast.success("Audio enabled", { autoClose: 1000 });
         })
         .catch(() => {
           confirm({

@@ -32,7 +32,7 @@ const Root = () => {
               <ConfirmProvider>
                 <AlarmAudioPlayerProvider>
                   <App />
-                  <ToastContainer position="top-left" />
+                  <ToastContainer position="top-left" theme="dark" />
                 </AlarmAudioPlayerProvider>
               </ConfirmProvider>
             </PersistGate>
