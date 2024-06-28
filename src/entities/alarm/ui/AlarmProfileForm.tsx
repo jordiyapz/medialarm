@@ -5,8 +5,9 @@ import FMTextField from "@/shared/ui/FMTextField";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useRef } from "react";
 import { useAppDispatch } from "@/shared/hooks/store";
-import { addAlarmProfiles, updateAlarmProfile } from "../alarm-slice";
+import { addAlarmProfile, updateAlarmProfile } from "../alarm-slice";
 import { useProfileForm } from "../hooks";
+import { toast } from "react-toastify";
 
 interface AlarmProfileValues
   extends Pick<Required<AlarmProfile>, "name" | "numOfRings"> {
@@ -46,20 +47,26 @@ const AlarmProfileForm = ({ values = {} }: AlarmProfileFormProps) => {
   ) => {
     const { date, time, ...rest } = values;
     const newDate = dayjs(`${date} ${time}`, "YYYY-MM-DD HH:mm").toDate();
-    if (profileForm.isEditing) {
-      dispatch(
-        updateAlarmProfile({
-          id: profileForm.item as string, // because the state is editing, means item is not null.
-          ...serializeAlarmProfile({ ...rest, start: newDate }),
-        })
-      );
-      profileForm.close();
-    } else {
-      const newProfile = createProfile({
-        ...rest,
-        start: newDate,
-      });
-      dispatch(addAlarmProfiles([newProfile]));
+    try {
+      if (profileForm.isEditing) {
+        dispatch(
+          updateAlarmProfile({
+            id: profileForm.item as string, // because the state is editing, means item is not null.
+            ...serializeAlarmProfile({ ...rest, start: newDate }),
+          })
+        );
+        profileForm.close();
+      } else {
+        const newProfile = createProfile({
+          ...rest,
+          start: newDate,
+        });
+        dispatch(addAlarmProfile(newProfile));
+      }
+    } catch (error) {
+      console.error(error);
+      // @ts-expect-error error is unknown.
+      toast.error(error.message);
     }
     setSubmitting(false);
   };

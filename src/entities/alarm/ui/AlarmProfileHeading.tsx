@@ -11,6 +11,7 @@ import { ToggleExpiredButton } from "./ToggleExpiredButton";
 import { DeleteExpiredButton } from "./DeleteExpiredButton";
 import ExportMenuItem from "./ExportMenuItem";
 import ImportMenuItem from "./ImportMenuItem";
+import DuplicateByDateMenuItem from "./DuplicateByDateMenuItem";
 
 const AlarmProfileHeading = () => {
   const { isEditing } = useProfileForm();
@@ -32,6 +33,7 @@ const AlarmProfileHeading = () => {
         <MoreMenu>
           <ImportMenuItem />
           <ExportMenuItem />
+          <DuplicateByDateMenuItem />
         </MoreMenu>
       </Stack>
     </Stack>

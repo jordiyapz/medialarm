@@ -71,5 +71,6 @@ export const createProfile = (
   return {
     ...defaultProfileBase,
     ...(isHydratedProfile(profile) ? serializeAlarmProfile(profile) : profile),
+    id: defaultProfileBase.id,  // to make sure new profile always have new id;
   };
 };

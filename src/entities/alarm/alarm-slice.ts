@@ -140,9 +140,19 @@ export const alarmSlice = createSlice({
   initialState,
   reducers: {
     addAlarmProfile: (state, action: PayloadAction<PlainAlarmProfile>) => {
+      const currentProfileIds = state.profiles.map((p) => p.id);
+      console.debug(currentProfileIds);
+      const isValid = !currentProfileIds.includes(action.payload.id);
+      if (!isValid) throw new Error("Duplicate id is not allowed");
+
       state.profiles.push(action.payload);
     },
     addAlarmProfiles: (state, action: PayloadAction<PlainAlarmProfile[]>) => {
+      const currentProfileIds = state.profiles.map((p) => p.id);
+      const incomingIds = action.payload.map((p) => p.id);
+      const isValid =
+        currentProfileIds.filter((c) => incomingIds.includes(c)).length === 0;
+      if (!isValid) throw new Error("Duplicate ids are not allowed");
       state.profiles.push(...action.payload);
     },
     appendAlarmProfile: (state, action: PayloadAction<PlainAlarmProfile>) => {
